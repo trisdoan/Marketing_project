@@ -53,8 +53,7 @@ class StandardETL(ABC):
         context = gx.get_context(
             context_root_dir=os.path.join(
                 os.getcwd(),
-                "src",
-                "great_expectations",
+                "gx",
             )
         )
 

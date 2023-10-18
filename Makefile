@@ -40,3 +40,6 @@ spark-sh:
 # TEST & FORMAT CODE
 test:
 	docker exec -ti local-spark bash -c 'python3 -m pytest --log-cli-level info -p no:warnings -v ./src/tests'
+
+gx:
+	PGPASSWORD=tris123 pgcli -h localhost -p 5432 -U tris -d metadatadb

@@ -29,10 +29,10 @@ services:
       - "5432:5432"
 
 
-  cloud-store:
+  minio:
     image: 'minio/minio:RELEASE.2023-07-21T21-12-44Z'
-    hostname: cloud-store
-    container_name: cloud-store
+    hostname: minio
+    container_name: minio
     environment:
       MINIO_ACCESS_KEY: minio
       MINIO_SECRET_KEY: minio123
@@ -45,8 +45,8 @@ services:
     image: minio/mc
     container_name: createbuckets
     depends_on:
-      - cloud-store
+      - minio
     entrypoint: >
-      /bin/sh -c " /usr/bin/mc config host add cloud-store http://minio:9000 minio minio123; /usr/bin/mc rm -r --force cloud-store/marketing_project; /usr/bin/mc mb cloud-store/marketing_project; /usr/bin/mc policy download cloud-store/marketing_project; exit 0; "
+      /bin/sh -c " /usr/bin/mc config host add minio http://minio:9000 minio minio123; /usr/bin/mc rm -r --force minio/marketing_project; /usr/bin/mc mb minio/marketing_project; /usr/bin/mc policy download minio/marketing_project; exit 0; "
 
 
